@@ -20,17 +20,17 @@ st.sidebar.title('Input features')
 sepal_length = st.sidebar.slider('Sepal Length', float(df['sepal length (cm)'].min()), float(df['sepal length (cm)'].max()))
 sepal_width = st.sidebar.slider('Sepal Width', float(df['sepal width (cm)'].min()), float(df['sepal width (cm)'].max()))
 petal_length = st.sidebar.slider('Petal Length', float(df['petal length (cm)'].min()), float(df['petal length (cm)'].max()))
-petal_width = st.sidebar.slider('Petal Width', float(df['petal width (cm)'].min()), float(df['petal width (cm)'].max())
+petal_width = st.sidebar.slider('Petal Width', float(df['petal width (cm)'].min()), float(df['petal width (cm)'].max()))
  
- input_data = [[sepal_length, sepal_width, petal_length, petal_width]]     
+input_data = [[sepal_length, sepal_width, petal_length, petal_width]]     
  
  # prediction
- prediction = model.predict(input_data)
- predicted_species = model.predict_proba(input_data)
+prediction = model.predict(input_data)
+predicted_species = model.predict_proba(input_data)
  
- st.subheader('Prediction')
- st.write(target_names[prediction[0]])
+st.subheader('Prediction')
+st.write(target_names[prediction[0]])
  
- st.subheader('Prediction Probability')
- st.write(predicted_species)
-      
+st.subheader('Prediction Probability')
+st.write(predicted_species)
+
