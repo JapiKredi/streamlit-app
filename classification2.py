@@ -12,17 +12,25 @@ def load_data():
 
 data, target_names = load_data()
 
+# Sidebar inputs for sepal and petal dimensions
+st.sidebar.header('Input Features')
+sepal_length = st.sidebar.slider('Sepal Length (cm)', float(data['sepal length (cm)'].min()), float(data['sepal length (cm)'].max()), float(data['sepal length (cm)'].mean()))
+sepal_width = st.sidebar.slider('Sepal Width (cm)', float(data['sepal width (cm)'].min()), float(data['sepal width (cm)'].max()), float(data['sepal width (cm)'].mean()))
+petal_length = st.sidebar.slider('Petal Length (cm)', float(data['petal length (cm)'].min()), float(data['petal length (cm)'].max()), float(data['petal length (cm)'].mean()))
+petal_width = st.sidebar.slider('Petal Width (cm)', float(data['petal width (cm)'].min()), float(data['petal width (cm)'].max()), float(data['petal width (cm)'].mean()))
+
 # Train a RandomForestClassifier
 clf = RandomForestClassifier()
 clf.fit(data.iloc[:, :-1], data['species'])
 
-# Make a prediction (for example purposes, we'll use the first sample)
-sample = data.iloc[0, :-1].values.reshape(1, -1)
+# Make a prediction based on user input
+sample = [[sepal_length, sepal_width, petal_length, petal_width]]
 predicted_probabilities = clf.predict_proba(sample)[0]
 
 # Convert probabilities to percentages
 predicted_percentages = predicted_probabilities * 100
 
 # Display the predicted species as percentages
+st.write("### Predicted Species Probabilities")
 for species, percentage in zip(target_names, predicted_percentages):
     st.write(f"{species}: {percentage:.2f}%")
